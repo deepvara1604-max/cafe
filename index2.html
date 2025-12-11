@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🌸 SIYA CAFE 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+        :root{
+      --accent: #ff69b4; /* Rose Pink / Hot Pink for accent */
+      --accent-light: #ffc0cb; /* Baby Pink */
+      --blush: #f4a2ad; /* Blush */
+      --muted:#8b8b8b;
+      --card:#fff;
+      --bg:#fffafa; /* Soft White/Very light pink background */
+    }
+    
+    /* Typography: Rounded, soft, romantic */
+    /* Using Quicksand for main text, Satisfy for romantic accents (like tagline) */
+    *{box-sizing:border-box;font-family:Quicksand,system-ui,Segoe UI,Arial;margin:0;padding:0}
+    
+    html,body{height:100%;background:var(--bg);color:#333}
+    a{color:inherit}
+
+    /* ---------- header + nav ---------- */
+    header{padding:30px 16px 20px;text-align:center}
+    /* Main H1 Title is more playful and romantic */
+    header h1{
+      font-family: Satisfy, cursive;
+      font-size: 38px;
+      letter-spacing: 1px;
+      color: var(--accent); /* Rose Pink Title */
+      text-shadow: 1px 1px 3px #ffc0cb77;
+    }
+    .tagline{
+      color: var(--blush); /* Blush Pink Tagline */
+      font-family: Quicksand, sans-serif;
+      font-weight: 500;
+      margin-top:8px;
+    }
+    nav{display:flex;justify-content:center;gap:25px;margin-top:20px}
+    nav button{
+      background:transparent;
+      border:none;
+      font-weight:700;
+      padding:10px 15px;
+      border-radius:20px; /* More rounded */
+      cursor:pointer;
+      color: #555;
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+    nav button:hover{
+      background: var(--accent-light); /* Baby Pink hover */
+      color: var(--accent);
+      box-shadow: 0 4px 10px #ff69b430;
+    }
+
+    /* ---------- layout ---------- */
+    .wrap{max-width:1280px;margin:22px auto;padding:0 16px;display:grid;grid-template-columns:1fr 320px;gap:20px}
+    main{min-height:60vh}
+    .panel{
+      background:var(--card);
+      border-radius:20px; /* Highly rounded corners */
+      padding:20px;
+      box-shadow:0 10px 30px #ff69b41a; /* Soft, pinkish shadow */
+    }
+
+    /* ---------- search + filter ---------- */
+    .controls{display:flex;gap:10px;align-items:center;margin-bottom:15px}
+    .controls input,.controls select{
+      padding:12px;
+      border-radius:15px; /* Rounded inputs */
+      border:2px solid var(--accent-light); /* Baby Pink border */
+      width:100%;
+      transition: border-color 0.3s;
+    }
+    .controls input:focus, .controls select:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+    
+    /* --- NEW CSS for Centering the Menu Grid Content --- */
+    /* This centers the menu items within the main content column on large screens */
+    .menu-content-centered {
+      max-width: 960px; /* Set a max width that comfortably holds 3 columns with padding */
+      margin: 0 auto; /* Center the block horizontally */
+    }
+
+    /* ---------- menu grid (MODIFIED FOR 3 COLUMNS) ---------- */
+    /* Forces 3 columns on wide screens (3 items per horizontal row) */
+    .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    
+    .card{
+      display:flex;
+      flex-direction:column;
+      border-radius:18px; /* More rounded card */
+      overflow:hidden;
+      background:#fff;
+      transition:transform .3s,box-shadow .3s;
+      box-shadow:0 6px 18px #ffc0cb55; /* Soft, pinkish initial shadow */
+    }
+    .card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 18px 40px #ff69b430; /* Stronger rose-pink shadow on hover */
+    }
+
+    /* google-style thumbnail row */
+    .thumb{
+      height:160px; /* Slightly taller images */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--bg); /* Soft background for image area */
+    }
+    .thumb img{
+      height:100%;
+      width:auto;
+      max-width:100%;
+      object-fit:cover;
+      border-bottom:1px solid var(--accent-light); /* Baby pink separator */
+    }
+
+    .card-body{padding:15px}
+    .card-body h3{font-size:18px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+    .card-body p{color:var(--muted);font-size:14px;margin-bottom:10px}
+    .meta{display:flex;gap:8px;align-items:center}
+
+    .price{font-weight:700; color: var(--accent)} /* Price in Rose Pink */
+    .btn-row{display:flex;gap:10px;align-items:center;margin-top:10px}
+    .btn{
+      padding:10px 14px;
+      border-radius:12px; /* Rounded buttons */
+      border:none;
+      cursor:pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn.add{
+      background:var(--accent); /* Rose Pink Add Button */
+      color:#fff;
+      font-weight:700;
+    }
+    .btn.add:hover{
+      background: #e55a9d; /* Slightly darker pink on hover */
+      transform: scale(1.02);
+    }
+    .btn.view{
+      background:var(--accent-light); /* Baby Pink View Button */
+      color: var(--accent);
+      border: 1px solid var(--blush);
+    }
+    .btn.view:hover{
+      background: var(--blush);
+      color: #fff;
+    }
+
+    /* ---------- cart sidebar ---------- */
+    aside .cart{position:sticky;top:18px}
+    .cart h4{margin-bottom:15px; color: var(--accent)}
+    .cart-items{max-height:42vh;overflow:auto;margin-bottom:12px}
+    .cart-item{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:12px;
+      border-radius:15px; /* Rounded cart items */
+      background:#fff8fa; /* Very light pink background */
+      border: 1px solid var(--accent-light); /* Baby pink border */
+      margin-bottom:10px
+    }
+    .cart-item img{width:56px;height:56px;border-radius:10px;object-fit:cover}
+    .qty{display:flex;gap:8px;align-items:center}
+    .small{font-size:14px;color:var(--muted)}
+
+    .checkout{display:flex;flex-direction:column;gap:10px}
+    .checkout input{
+      padding:12px;
+      border-radius:15px;
+      border:1px solid var(--blush);
+    }
+    .checkout button{
+      padding:14px;
+      border-radius:15px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+      transition: background 0.3s;
+    }
+    .checkout button:hover{
+      background: #e55a9d;
+    }
+
+    /* ---------- categories list ---------- */
+    .categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}
+    .chip{
+      padding:10px 18px;
+      border-radius:999px;
+      background:#fff;
+      border:2px solid var(--accent-light); /* Baby Pink border */
+      cursor:pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .chip.active{
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow:0 8px 18px #ff69b430;
+      transform: translateY(-2px);
+    }
+
+    /* ---------- animations ---------- */
+    .fade-in{animation:fadeInUp .6s ease both}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+    /* ---------- responsive ---------- */
+    /* Adjust grid for smaller screens */
+    @media (max-width: 980px) {
+        .wrap{grid-template-columns:1fr}
+        /* Fallback to 2 columns on medium screens */
+        .menu-grid{grid-template-columns:repeat(2,1fr);} 
+        /* Remove centering wrapper on small screens to fill space */
+        .menu-content-centered {
+            max-width: none;
+            margin: 0;
+        }
+        /* Hide the static cart panel on smaller screens, rely on the drawer */
+        #cartPanelStatic {
+            display: none !important; 
+        }
+    }
+    @media (min-width: 981px) {
+         /* Hide floating button when static cart is visible */
+        .open-cart-btn {
+            display: none !important;
+        }
+    }
+    @media (max-width: 600px) {
+        /* Fallback to 1 column on small screens */
+        .menu-grid{grid-template-columns:1fr;} 
+    }
+
+    /* utility */
+    .muted{color:var(--muted)}
+    
+    /* ---------- cart drawer + controls ---------- */
+    /* REMOVED .open-cart-btn CSS BLOCK ENTIRELY */
+
+    .cart-drawer{
+      position:fixed;
+      right:-420px;
+      top:0;
+      height:100%;
+      width:380px;
+      background:#fff;
+      box-shadow:-20px 0 50px #ff69b430;
+      transition:right .36s ease;
+      z-index:100;
+      padding:20px;
+      overflow:auto;
+      border-left: 5px solid var(--accent-light); /* Soft line detail */
+    }
+    .cart-drawer.open{right:0}
+    .cart-drawer .drawer-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+    .cart-drawer .drawer-header h4{margin:0; color: var(--accent)}
+    .cart-drawer .close-drawer{
+      background:var(--accent-light);
+      border:1px solid var(--blush);
+      padding:8px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .cart-drawer .close-drawer:hover{
+      background: var(--blush);
+      color: #fff;
+    }
+    .cart-drawer .cart-footer{
+      position:sticky;
+      bottom:0;
+      background:var(--card);
+      padding-top:15px;
+      margin-top:15px;
+      box-shadow: 0 -5px 10px -5px #0000000a; /* Subtle separator shadow */
+    }
+    .cart-drawer .total-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-weight:700;font-size:18px; color: var(--accent)}
+    .remove-btn{background:transparent;border:none;color:var(--accent);cursor:pointer;font-size:20px;padding:6px;transition: transform 0.2s;}
+    .remove-btn:hover{transform: scale(1.1);}
+    .cart-item{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px;
+      border-radius:12px;
+      background:#fff8fa;
+      margin-bottom:10px;
+      box-shadow: 0 2px 8px #ffc0cb30;
+    }
+    .cart-item .meta{flex:1}
+
+    /* small responsive tweak */
+    @media (max-width:600px){
+      .cart-drawer{width:100%;right:-100%}
+      .cart-drawer.open{right:0}
+    }
+    .menu-section{max-width:1100px;margin:18px auto;padding:0 16px}
+    .menu-category{margin-top:15px}
+    .menu-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+    .item-card{
+      background:#fff;
+      border-radius:15px;
+      padding:10px;
+      box-shadow:0 6px 18px #ffc0cb30;
+      transition:transform .3s,box-shadow .3s;
+      overflow:hidden;
+    }
+    .item-card:hover{transform:translateY(-4px); box-shadow:0 12px 30px #ff69b420;}
+    .item-card h4{margin:8px 0 4px; color: #555;}
+    .item-card p{color:var(--muted);font-size:14px}
+    .item-img{width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:8px}
+    .size-select{
+      width:100%;
+      padding:10px;
+      border-radius:10px;
+      border:1px solid var(--accent-light);
+      margin-bottom:10px;
+      color: #555;
+    }
+    .add-btn{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+      transition: background 0.2s;
+    }
+    .add-btn:hover{background: #e55a9d;}
+
+    /* animated chip highlight for tea (themed to match pinks) */
+    .chip.tea-chip{
+      background:linear-gradient(90deg,var(--accent-light),#fff);
+      border-color:var(--blush);
+      box-shadow:0 8px 18px #ff69b410;
+      color: var(--accent);
+    }
+    .chip svg{height:16px;width:16px;margin-right:6px;vertical-align:middle}
+    .chip svg path{stroke: var(--accent) !important;} /* Force heart/sparkle color to accent pink */
+
+    .clear-cart-btn {
+      background: var(--accent-light);
+      border: 1px solid var(--blush);
+      color: var(--accent);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .clear-cart-btn:hover {
+      background: var(--blush);
+      color: #fff;
+    }
+
+</style>
+</head>
+<body>
+  <header>
+    <h1>SIYA💖 </h1><h1>Cafe☕ᝰ.ᐟ</h1> <div class="tagline">Where Peace Brews with a Pinch of Love ✨</div> <nav>
+      <button id="btn-menu">Menu</button>
+      <button id="btn-about">About</button>
+      <button id="btn-contact">Contact</button>
+    </nav>
+  </header>
+
+  <div class="wrap">
+    <main>
+      <section class="panel fade-in" id="menuPanel">
+        <div class="controls">
+          <input id="search" placeholder="🔍 Search items (eg. mocha, frappe)" /> <select id="filter">
+            <option value="all">All categories</option>
+            <option value="hot">Hot Drinks</option>
+            <option value="cold">Cold Coffee</option>
+            <option value="frap">Frappuccino</option>
+            <option value="shake">Milkshakes</option>
+            <option value="refresher">Refreshers</option>
+            <option value="food">Snacks</option>
+          </select>
+        </div>
+        
+        <div class="menu-content-centered">
+            <div class="categories" id="categories"></div>
+            <div class="menu-grid" id="menuGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="panel fade-in" id="aboutPanel" style="display:none;margin-top:16px">
+        <h2>💖 About Siya Cafe</h2>
+        <p class="small muted" style="margin-top:8px;line-height:1.6">SIYA CAFE is a peaceful corner created with warmth, comfort, and love. Our goal is simple — to make every person feel relaxed the moment they enter. From freshly brewed coffee to heartwarming snacks, every item is made with care and purity.</p>
+      </section>
+
+      <section class="panel fade-in" id="contactPanel" style="display:none;margin-top:16px">
+        <h2>💌 Contact</h2> <p class="small muted" style="margin-top:8px;line-height:1.6">
+          Owners: SIDDHIKA DAVE & DEVRSHYA VARA<br>
+          Phone example: +91 916010 40807<br>
+          Address: 123 Peace Lane,Ahmedabad 
+        </p>
+      </section>
+    </main>
+
+    <aside>
+      <div class="cart-drawer" id="cartDrawer" aria-hidden="true">
+        <div class="drawer-header">
+          <h4>Your Cozy Cart 🧺</h4>
+          <div>
+            <button class="close-drawer" id="closeCartBtn">Close ✕</button>
+          </div>
+        </div>
+
+        <div id="cartItems"></div>
+        <div class="small muted" id="cartEmpty">Add dreamy items to your cart! ✨</div>
+
+        <div style="margin-top:8px">
+          <button id="clearCartBtn" class="clear-cart-btn">Clear Cart</button>
+        </div>
+
+        <div class="cart-footer">
+          <div class="cart-footer-inner cart-footer" style="margin-top:12px">
+            <div class="total-row"><span>Total</span><span id="totalPrice">₹0</span></div>
+            <div style="margin-top:8px">
+              <input id="custName" placeholder="Your name " style="width:100%;margin-bottom:8px;padding:12px;border-radius:15px;border:1px solid var(--blush)" />
+              <input id="custPhone" placeholder="Phone number (eg. +919876543210)" style="width:100%;margin-bottom:8px;padding:12px;border-radius:15px;border:1px solid var(--blush)" />
+              <button id="placeOrderBtn" style="width:100%;padding:14px;border-radius:15px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer">Place Order & Send SMS 📝</button> </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel cart" aria-live="polite" id="cartPanelStatic"> 
+        <h4>Your Cozy Cart 🧺</h4>
+        <div class="cart-items" id="cartItemsStatic"></div>
+        <div class="small muted" id="cartEmptyStatic">Add dreamy items to your cart! ✨</div>
+        
+        <div class="total-row" style="margin-top: 15px; border-top: 1px dashed var(--accent-light);"><span>Total</span><span id="totalPriceStatic">₹0</span></div>
+        
+        <div style="margin-top:10px">
+          <button id="checkoutBtnStatic" class="btn add" style="width:100%; font-size:16px;">Proceed to Checkout 💖</button>
+        </div>
+
+        <div style="margin-top:10px;font-size:14px;color:var(--muted)">
+            <p>Ready to checkout? Click the button above to open the full checkout panel.</p>
+        </div>
+      </div>
+      </aside>
+  </div>
+
+  <script>
+    /****************************************************************
+      * Client-side app: menu items, add-to-cart, thumbnails, animations
+      ****************************************************************/
+
+    const MENU = [
+      // --- TEAS & COLD BREWS ---
+      { id:'tea_breakfast', name:'Royal English Breakfast Tea', cat:'tea', price:120, sizes:{Short:120,Tall:150,Grande:180,Venti:210}, img:'A.png', desc:'full-bodied, robust, and malty black tea blend'  },
+      { id:'tea_earlgrey', name:'Earl Grey Tea', cat:'tea', price:130, sizes:{Short:130,Tall:160,Grande:190,Venti:220}, img:'B.png' , desc:'fragrant black tea flavored with the citrus oil of bergamot'},
+      { id:'tea_cloudmist', name:'Emperor’s Cloud & Mist', cat:'tea', price:140, sizes:{Short:140,Tall:170,Grande:200,Venti:230}, img:'C.png' , desc:'delicate and vegetal green tea'},
+      { id:'tea_mint', name:'Mint Majesty', cat:'tea', price:125, sizes:{Short:125,Tall:155,Grande:185,Venti:215}, img:'D.png' , desc:'non-caffeinated herbal infusion of peppermint and spearmint leaves.'},
+      { id:'tea_peach', name:'Peach Tranquility', cat:'tea', price:135, sizes:{Short:135,Tall:165,Grande:195,Venti:225}, img:'E.png', desc:'Peach & chamomile blend.' },
+
+      // Iced Shaken Teas
+      { id:'iced_black', name:'Iced Black Tea', cat:'tea', price:150, img:'F.png', desc:'Refreshing & bold.' },
+      { id:'iced_green', name:'Iced Green Tea', cat:'tea', price:150, img:'G.png', desc:'Light & cooling.' },
+      { id:'iced_black_lem', name:'Iced Black Tea Lemonade', cat:'tea', price:170, img:'H.png', desc:'Perfect sweet–tangy blend.' },
+      { id:'iced_green_lem', name:'Iced Green Tea Lemonade', cat:'tea', price:170, img:'I.png', desc:'Zesty & refreshing.' },
+
+      // Cold Brews
+      { id:'cb_vanilla', name:'Vanilla Sweet Cream Cold Brew', cat:'tea', price:240, img:'J.png', desc:'Cold brew topped with vanilla cream.' },
+      { id:'cb_salted', name:'Salted Caramel Cream Cold Brew', cat:'tea', price:250, img:'K.png', desc:'Creamy cold brew with caramel notes.' },
+      { id:'cb_classic', name:'Cold Brew', cat:'tea', price:220, img:'L.png', desc:'Slow-steeped smooth coffee.' },
+      { id:'cb_vanilla2', name:'Vanilla Cream Cold Brew', cat:'tea', price:230, img:'M.png', desc:'Silky vanilla cold brew.' },
+
+      // Hot / existing
+      { id:'classic_hot', name:'Classic Hot Coffee', cat:'hot', price:150, img:'N.png', desc:'Warm, comforting.' },
+      { id:'americano', name:'Americano', cat:'hot', price:240, sizes:{S:240,M:300,L:345}, img:'O.png', desc:'Bold espresso with hot water.' },
+      { id:'capp', name:'Cappuccino', cat:'hot', price:245, sizes:{S:245,M:305,L:350}, img:'P.png', desc:'Creamy, frothy.' },
+
+      // Cold Coffee
+      { id:'cold_classic', name:'Classic Iced Coffee', cat:'cold', price:225, sizes:{S:225,M:250}, img:'Q.png', desc:'Chilled classic brew with milk.' },
+      { id:'cold_baileys', name:'Iced Coffee — Caramel', cat:'cold', price:255, img:'R.png', desc:'Caramel drizzle & chilled espresso.' },
+
+      // Frappuccino
+      { id:'frap_choco', name:'Choco Frappuccino', cat:'frap', price:320, img:'S.png', desc:'Blended chocolatey cold frappe.' },
+      { id:'frap_caramel', name:'Caramel Frappe', cat:'frap', price:340, img:'T.png', desc:'Caramel blended with frappe foam.' },
+
+      // Milkshakes
+      { id:'ms_choco', name:'Chocolate Milkshake', cat:'shake', price:149, img:'U.png', desc:'Rich & creamy chocolate milkshake.' },
+      { id:'ms_vanilla', name:'Vanilla Milkshake', cat:'shake', price:139, img:'V.png', desc:'Classic vanilla shake, silky.' },
+
+      // Refreshers
+      { id:'ref_lem', name:'Lemon Refresher', cat:'refresher', price:120, img:'W.png', desc:'Zesty, cooling lemon cooler.' },
+      { id:'ref_mint', name:'Mint Cooler', cat:'refresher', price:140, img:'Y.png', desc:'Fresh mint and lime.' },
+
+      // snacks
+      { id:'sand', name:'Veg Cheese Sandwich', cat:'food', price:129, img:'Z.png', desc:'Toasted goodness with cheese.' },
+      { id:'fries', name:'Crispy Masala Fries', cat:'food', price:99, img:'ZZ.png', desc:'Spicy, crispy fries.' }
+    ];
+
+    // categories
+    const CATS = ['all','hot','cold','frap','shake','refresher','food','tea'];
+
+    // helpers
+    const $ = sel => document.querySelector(sel);
+    const create = (tag, props={}, children=[])=>{ const el=document.createElement(tag); Object.assign(el,props); children.forEach(c=>el.appendChild(c)); return el }
+
+    // render categories chips
+    const categoriesEl = document.getElementById('categories');
+    CATS.forEach(cat=>{
+      const isActive = (cat==='all');
+      const chip = document.createElement('button');
+      chip.className = 'chip' + (isActive? ' active' : '');
+      if(cat === 'tea'){
+        chip.classList.add('tea-chip');
+        // Updated icon for a romantic/dreamy look (heart inside a circle/cup shape)
+        chip.innerHTML = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 8c0-2.8 2.2-5 5-5s5 2.2 5 5c0 3-4 5-5 5s-5-2-5-5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15L12 15C10.74 16.27 9 17.15 7 17.15C4.85 17.15 3 15.3 3 13.15C3 11.2 5 9.8 6.5 8.7C7.3 8.1 7.8 7.2 8 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(0, 4) scale(0.6)"/><path d="M12 15L12 15C13.26 16.27 15 17.15 17 17.15C19.15 17.15 21 15.3 21 13.15C21 11.2 19 9.8 17.5 8.7C16.7 8.1 16.2 7.2 16 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(0, 4) scale(0.6)"/></svg> Teas`;
+      } else if (cat === 'all') {
+        chip.innerText = '💖 All';
+      } else if (cat === 'hot') {
+        chip.innerText = '🔥 Hot';
+      } else if (cat === 'cold') {
+        chip.innerText = '🧊 Cold';
+      } else if (cat === 'frap') {
+        chip.innerText = '🍦 Frappes';
+      } else if (cat === 'shake') {
+        chip.innerText = '🥛 Shakes';
+      } else if (cat === 'refresher') {
+        chip.innerText = '🍋 Refreshers';
+      } else if (cat === 'food') {
+        chip.innerText = '🥪 Snacks';
+      } else {
+        chip.innerText = cat.charAt(0).toUpperCase()+cat.slice(1);
+      }
+      chip.addEventListener('click',()=>{ document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active')); chip.classList.add('active'); renderMenu(cat); });
+      categoriesEl.appendChild(chip);
+    });
+
+    // cart: simple structure {id, qty, size}
+    const CART_KEY = 'siya_cart_v1';
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+
+    function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); renderCart(); }
+
+    function addToCartWithSize(itemId, size){
+      const existing = cart.find(c=>c.id===itemId && c.size===size);
+      if(existing) existing.qty += 1; else cart.push({ id:itemId, qty:1, size: size || null });
+      saveCart(); animateAdded(itemId);
+    }
+
+    function updateQty(itemId, qty){
+      // Need to find by both ID and size for correct update
+      const itemToUpdate = cart.find(c => c.id === itemId.split('_')[0] && c.size === (itemId.split('_').length > 1 ? itemId.split('_')[1].replace(/-/g, ' ') : null));
+      if(!itemToUpdate) return;
+      
+      if(qty<=0){ 
+          cart = cart.filter(c => !(c.id === itemToUpdate.id && c.size === itemToUpdate.size));
+      } else { 
+          itemToUpdate.qty=qty;
+      }
+      saveCart();
+    }
+
+    function animateAdded(itemId){ const el=document.querySelector(`[data-id="${itemId}"]`); if(!el) return; el.style.transform='scale(1.03)'; setTimeout(()=>el.style.transform='none',220); }
+
+    // render a single card
+    function renderCard(it){
+      const card = create('article',{className:'card fade-in', 'data-id':it.id});
+      const thumb = create('div',{className:'thumb'});
+      // Placeholder image fallback added if img starts with 'A'
+      const imgSrc = it.img === 'A' ? 'https://source.unsplash.com/400x400/?cafe,coffee' : it.img;
+      const img = create('img',{src:imgSrc, alt:it.name, loading:'lazy'});
+      thumb.appendChild(img);
+
+      const body = create('div',{className:'card-body'});
+      const h3 = create('h3');
+      
+      // Determine the price to show (single price or the price of the first size option)
+      const priceToDisplay = it.sizes ? Object.values(it.sizes)[0] : it.price;
+      h3.innerHTML = `<span>${it.name}</span><span class="price">₹${priceToDisplay}</span>`;
+      
+      const p = create('p',{innerText:it.desc});
+
+      // Size Selection logic: Dynamically create a select dropdown if the item has sizes
+      let sizeSelect = null;
+      if (it.sizes) {
+          // Changed style property to class for cleaner CSS
+          sizeSelect = create('select', {className: 'size-select'});
+          Object.entries(it.sizes).forEach(([sizeName, sizePrice]) => {
+              const option = create('option', {value: sizeName, innerText: `${sizeName} (₹${sizePrice})`});
+              sizeSelect.appendChild(option);
+          });
+      }
+
+      const btnRow = create('div',{className:'btn-row'});
+      const addBtn = create('button',{className:'btn add', innerText:'Add to cart 💖'}); // Heart Icon
+      
+      // Event listener logic: handles both sized and non-sized items.
+      addBtn.addEventListener('click', ()=>{
+          const selectedSize = sizeSelect ? sizeSelect.value : null;
+          addToCartWithSize(it.id, selectedSize);
+          // Open cart drawer for feedback
+          const cd = document.getElementById('cartDrawer'); 
+          // Check if cartDrawer is visible (which it shouldn't be on desktop) and open it.
+          // On mobile, the drawer opens. On desktop, the sidebar updates, and we give visual feedback.
+          // Since the sidebar is now present, we only open the drawer on mobile screen sizes.
+          if(window.innerWidth <= 980) {
+              if(cd) cd.classList.add('open');
+          }
+      });
+
+      const viewBtn = create('button',{className:'btn view', innerText:'✨ View'}); // Sparkle Icon
+      viewBtn.addEventListener('click',()=>quickView(it));
+
+      // Append elements to body: h3, p, [sizeSelect], btnRow
+      body.appendChild(h3);
+      body.appendChild(p);
+      if(sizeSelect){
+          body.appendChild(sizeSelect);
+      }
+      btnRow.appendChild(addBtn);
+      btnRow.appendChild(viewBtn);
+      body.appendChild(btnRow);
+      
+      card.appendChild(thumb); card.appendChild(body);
+      return card;
+    }
+
+    // render grid
+    function renderMenu(filter='all', query=''){
+      const grid = document.getElementById('menuGrid'); grid.innerHTML='';
+      const q = query.trim().toLowerCase();
+      const items = MENU.filter(it=> (filter==='all' || it.cat===filter) && (it.name.toLowerCase().includes(q) || (it.desc||'').toLowerCase().includes(q)) );
+      if(items.length===0){ grid.innerHTML='<div class="muted" style="text-align:center; padding: 20px;">No dreamy items found matching your search. Try another one! 😔</div>'; return }
+      items.forEach(it=> grid.appendChild(renderCard(it)));
+    }
+
+    // quick view modal (simple alert-like)
+    function quickView(it){
+      const sizes = it.sizes? Object.entries(it.sizes).map(([k,v])=>`${k}: ₹${v}`).join(' | '):'';
+      alert(`${it.name}\n\n${it.desc}\n\n${sizes?('Sizes — '+sizes):('Price — ₹'+it.price)}`);
+    }
+
+    // search/filter listeners
+    document.getElementById('search').addEventListener('input', e=>{
+      const f = document.getElementById('filter').value; renderMenu(f, e.target.value);
+    });
+    document.getElementById('filter').addEventListener('change', e=> renderMenu(e.target.value, document.getElementById('search').value) );
+
+    // initial render
+    renderMenu();
+
+    // render cart UI
+    function getItemPrice(ci, item) {
+        if (ci.size && item.sizes && item.sizes[ci.size]) {
+            return item.sizes[ci.size];
+        }
+        // Fallback to base price
+        return typeof item.price === 'number' ? item.price : parseInt(item.price) || 0;
+    }
+
+    function calculateTotal(){
+      return cart.reduce((sum, ci) => {
+        const item = MENU.find(x=>x.id===ci.id) || {};
+        const price = getItemPrice(ci, item);
+        return sum + (price * ci.qty);
+      }, 0);
+    }
+
+    function removeItem(ci){
+      // Filter based on both ID and size
+      cart = cart.filter(c => !(c.id === ci.id && c.size === ci.size));
+      saveCart();
+    }
+    
+    // Helper to generate a unique ID for cart item elements (ID + Size)
+    function getCartItemId(ci) {
+        // Use hyphen for safe attribute/variable naming from size (e.g., 'Vanilla Sweet Cream Cold Brew_Short')
+        return ci.id + (ci.size ? '_' + ci.size.replace(/\s/g, '-') : '');
+    }
+
+    function renderCart(){
+      // Elements for the drawer (main cart)
+      const elDrawer = document.getElementById('cartItems');
+      const emptyDrawer = document.getElementById('cartEmpty');
+      const totalDrawer = document.getElementById('totalPrice');
+
+      // Elements for the static sidebar cart
+      const elStatic = document.getElementById('cartItemsStatic');
+      const emptyStatic = document.getElementById('cartEmptyStatic');
+      const totalStatic = document.getElementById('totalPriceStatic');
+
+      // Clear both displays
+      elDrawer.innerHTML = '';
+      elStatic.innerHTML = '';
+      
+      const total = calculateTotal();
+
+      if(cart.length===0){ 
+        if(emptyDrawer) emptyDrawer.style.display='block'; 
+        if(emptyStatic) emptyStatic.style.display='block'; 
+      } else { 
+        if(emptyDrawer) emptyDrawer.style.display='none'; 
+        if(emptyStatic) emptyStatic.style.display='none';
+      }
+
+      cart.forEach(ci=>{
+        const item = MENU.find(m=>m.id===ci.id); if(!item) return;
+        const displayPrice = getItemPrice(ci, item);
+        const sizeText = ci.size ? `(${ci.size})` : '';
+        const uniqueId = getCartItemId(ci); 
+        
+        // --- Render Row for Drawer (with qty controls and remove button) ---
+        const rowDrawer = document.createElement('div'); rowDrawer.className='cart-item';
+        rowDrawer.dataset.cartItemId = uniqueId;
+        const img = document.createElement('img'); img.src = item.img === 'A' ? 'https://source.unsplash.com/400x400/?cafe,coffee' : item.img; img.alt = item.name;
+        const meta = document.createElement('div'); meta.className='meta';
+        meta.innerHTML = `<div style="font-weight:700">${item.name} ${sizeText}</div><div class="small muted">₹${displayPrice} × ${ci.qty} = <span style="color:var(--accent); font-weight:600;">₹${displayPrice*ci.qty}</span></div>`;
+
+        const qty = document.createElement('div'); qty.className='qty';
+        const dec = create('button', {className:'btn view', innerText:'-'});
+        const num = create('div', {innerText:ci.qty, style:'padding:0 12px; font-weight: 700;'});
+        const inc = create('button', {className:'btn view', innerText:'+'});
+        
+        dec.addEventListener('click',()=> updateQty(uniqueId, ci.qty-1));
+        inc.addEventListener('click',()=> updateQty(uniqueId, ci.qty+1));
+        
+        qty.appendChild(dec); qty.appendChild(num); qty.appendChild(inc);
+
+        const remove = create('button', {className:'remove-btn', innerHTML: '💔', title:'Remove item'}); 
+        remove.addEventListener('click', ()=> removeItem(ci));
+
+        rowDrawer.appendChild(img); rowDrawer.appendChild(meta); rowDrawer.appendChild(qty); rowDrawer.appendChild(remove);
+        elDrawer.appendChild(rowDrawer);
+
+        // --- Render Row for Static Sidebar (simple display) ---
+        const rowStatic = document.createElement('div'); rowStatic.className='cart-item';
+        rowStatic.innerHTML = `
+          <img src="${img.src}" alt="${item.name}" style="width:40px; height:40px; border-radius:8px; object-fit:cover;">
+          <div class="meta" style="flex:1;">
+            <div style="font-weight:600; font-size:14px;">${item.name} ${sizeText}</div>
+            <div class="small muted">${ci.qty} x ₹${displayPrice}</div>
+          </div>
+          <span style="font-weight:700; color:var(--accent);">₹${displayPrice*ci.qty}</span>
+        `;
+        elStatic.appendChild(rowStatic);
+      });
+
+      // update total prices
+      const totalString = '₹' + total;
+      if(totalDrawer) totalDrawer.innerText = totalString;
+      if(totalStatic) totalStatic.innerText = totalString;
+    }
+
+    renderCart();
+
+    // CLEAR CART (shared)
+    function clearCartShared(){
+      if(cart.length === 0){ alert('Cart is already empty, my dear. 😌'); return; }
+      if(!confirm('Are you sure you want to remove all the lovely items from your cart? 😔')) return;
+      cart = [];
+      saveCart();
+      alert('Cart cleared! Time to fill it with more love. 💖');
+    }
+
+    // wire clear buttons
+    const clearBtn = document.getElementById('clearCartBtn');
+    if(clearBtn) clearBtn.addEventListener('click', clearCartShared);
+    
+    // Note: clearBtnStatic was removed from HTML, its logic is also removed from here.
+
+    // Drawer open/close
+    // Note: openCartBtn was removed from HTML
+    const closeCartBtn = document.getElementById('closeCartBtn');
+    const cartDrawer = document.getElementById('cartDrawer');
+    
+    if(closeCartBtn && cartDrawer){
+      closeCartBtn.addEventListener('click', ()=>{ cartDrawer.classList.remove('open'); cartDrawer.setAttribute('aria-hidden','true'); });
+    }
+    
+    // Wire the new static checkout button to open the main drawer
+    const checkoutBtnStatic = document.getElementById('checkoutBtnStatic');
+    if(checkoutBtnStatic && cartDrawer){
+      checkoutBtnStatic.addEventListener('click', ()=>{ cartDrawer.classList.add('open'); cartDrawer.setAttribute('aria-hidden','false'); });
+    }
+
+    // Close drawer when clicking outside (simple)
+    document.addEventListener('click', (e)=>{
+      if(!cartDrawer) return;
+      if(cartDrawer.classList.contains('open')){
+        // Check for clicks outside the drawer AND outside the static checkout button (which opens it)
+        const within = e.target.closest && (e.target.closest('#cartDrawer') || e.target.closest('#checkoutBtnStatic'));
+        if(!within) { cartDrawer.classList.remove('open'); cartDrawer.setAttribute('aria-hidden','true'); }
+      }
+    });
+
+    // place order -> POST to /api/orders (Updated for themed alerts)
+    document.getElementById('placeOrderBtn').addEventListener('click', async ()=>{
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      if(!name || !phone){ alert('Sweetheart, please provide your name and phone number to complete your order. 💖'); return }
+      if(cart.length===0){ alert('Your cart is feeling lonely. Add some cozy treats first! ✨'); return }
+
+      // build payload
+      // For a real-world app, you would pass size here for accurate server pricing
+      const items = cart.map(ci=>({ id:ci.id, qty:ci.qty, size: ci.size || null })); 
+      const payload = { name, phone, items, total: calculateTotal() }; // Added total to payload
+      
+      const btn = document.getElementById('placeOrderBtn');
+      btn.innerText = 'Order Placing... 💌';
+      btn.disabled = true;
+
+      try{
+        // Mocking the POST request since there is no server
+        await new Promise(resolve => setTimeout(resolve, 1500)); 
+        
+        // --- START MOCK RESPONSE ---
+        const data = { success: true, orderId: Math.floor(Math.random() * 90000) + 10000 };
+        // --- END MOCK RESPONSE ---
+
+        if(data && data.success){
+          alert(`Order placed successfully, ${name}! Your Order #${data.orderId} is being lovingly prepared. The cafe will receive an SMS. ☕`);
+          cart = []; saveCart(); document.getElementById('custName').value=''; document.getElementById('custPhone').value='';
+        } else {
+          alert('Oh no! Could not place order: ' + (data.message||'Unknown error. Our apologies! 🥺'));
+        }
+      }catch(err){ 
+        console.error(err); 
+        alert('Network error — the connection seems a little shy. Could not place order. 💔'); 
+      } finally {
+        btn.innerText = 'Place Order & Send SMS 📝';
+        btn.disabled = false;
+      }
+    });
+
+    // quick tab behaviour
+    document.getElementById('btn-about').addEventListener('click', ()=>{ document.getElementById('aboutPanel').style.display='block'; document.getElementById('contactPanel').style.display='none'; window.scrollTo({top:document.getElementById('aboutPanel').offsetTop-20,behavior:'smooth'}) });
+    document.getElementById('btn-contact').addEventListener('click', ()=>{ document.getElementById('contactPanel').style.display='block'; document.getElementById('aboutPanel').style.display='none'; window.scrollTo({top:document.getElementById('contactPanel').offsetTop-20,behavior:'smooth'}) });
+    document.getElementById('btn-menu').addEventListener('click', ()=>{ document.getElementById('aboutPanel').style.display='none'; document.getElementById('contactPanel').style.display='none'; window.scrollTo({top:document.getElementById('menuPanel').offsetTop-20,behavior:'smooth'}) });
+
+    // small accessibility: keyboard add to cart with Enter on focused card
+    document.addEventListener('keydown', e=>{ 
+        if(e.key==='Enter'){ 
+            const active = document.activeElement; 
+            if(active && active.closest && active.closest('.card')){ 
+                const card = active.closest('.card');
+                const id = card.dataset.id; 
+                // Find the associated size select if it exists
+                const sizeSelect = card.querySelector('.size-select');
+                const selectedSize = sizeSelect ? sizeSelect.value : null;
+
+                if(id) {
+                    addToCartWithSize(id, selectedSize);
+                    // Open cart drawer only on small screens for feedback
+                    const cd = document.getElementById('cartDrawer'); 
+                    if(window.innerWidth <= 980) {
+                        if(cd) cd.classList.add('open');
+                    }
+                }
+            } 
+        } 
+    });
+
+  </script>
+
+  </body>
+</html>
